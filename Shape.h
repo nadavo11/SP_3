@@ -12,7 +12,7 @@ class Shape {
     int width;
 public:
 /************************               getters                 ***************************/
-    /** returns shapes perimeter */
+    virtual /** returns shapes perimeter */
     double getPerimeter() const;
     /** returns shapes area */
     double getArea() const;

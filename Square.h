@@ -1,16 +1,12 @@
 //
 // Created by pc user on 12/30/2021.
 //
-
+/***************************          INCLUDES            **********************************/
 #ifndef SP_3_SQUARE_H
 #define SP_3_SQUARE_H
-
-
 #include "Shape.h"
-
 class Square: Shape {
-
-
+/************************               Fields                    ***************************/
     double a{};
 /************************          public METHODS                 *************************/
 public:

@@ -2,7 +2,7 @@
 **          Assignment C++: 1                                                  **
 **          Author: Nadav Orenstein, ID: 312349509                             **
 **                                                                             **
-**  FILENAME:     ex_4.cpp (simple classes implementation & OOP )              **
+**  FILENAME:     ex_3.cpp (simple classes implementation & OOP )              **
 **  DESCRIPTION:  CPP code that lets user define some objects, and play        **
 **                with them.                                                   **
 **                the program offers 3 reach menus for the user to choose      **
@@ -17,13 +17,13 @@
 #include "Shape.h"
 #include "Square.h"
 #include "Circle.h"
+#include "OrthogonalTriangle.h"
 
 using namespace std;
 
-                                         /**classes**/
 /********************************** MAIN ***************************************/
 
 int main() {
-    Square s = Square(12);
+    OrthogonalTriangle s = OrthogonalTriangle(12);
     s.draw();
 }

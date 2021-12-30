@@ -5,15 +5,14 @@
 #ifndef SP_3_ORTHOGONALTRIANGLE_H
 #define SP_3_ORTHOGONALTRIANGLE_H
 #include "Shape.h"
-
-
 class OrthogonalTriangle: Shape {
-/************************           Fields                      ***************************/
+/************************               Fields                    ***************************/
     double a;
 /************************          public METHODS                 *************************/
 public:
-    OrthogonalTriangle(double a);
-
+    /**Ctors*/
+    explicit OrthogonalTriangle(double a);
+    OrthogonalTriangle();
 /** returns shapes perimeter */
     double getPerimeter() const;
     /** returns shapes area */
