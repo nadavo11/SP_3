@@ -7,16 +7,20 @@
 
 
 class Shape {
- /***********************            private fields              ***************************/
+public:
+
+
+private:
+    /***********************            private fields              ***************************/
     char* color;
     int width;
 public:
 /************************               getters                 ***************************/
-    virtual /** returns shapes perimeter */
-    double getPerimeter() const;
+     /** returns shapes perimeter */
+    virtual double getPerimeter() const;
     /** returns shapes area */
-    double getArea() const;
-
+    virtual double getArea() const;
+    virtual void draw() const{}
 };
 
 

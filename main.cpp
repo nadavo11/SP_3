@@ -18,12 +18,20 @@
 #include "Square.h"
 #include "Circle.h"
 #include "OrthogonalTriangle.h"
+#include "Array.h"
 
 using namespace std;
 
 /********************************** MAIN ***************************************/
 
 int main() {
-    OrthogonalTriangle s = OrthogonalTriangle(12);
-    s.draw();
+    Shape *s;
+    OrthogonalTriangle t = OrthogonalTriangle( 12);
+    s = &t;
+
+    s->draw();
+    Array<Shape> A;
+    A.add( *s );
+    A[0].draw();
+
 }

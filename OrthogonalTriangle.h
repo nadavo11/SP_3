@@ -5,7 +5,10 @@
 #ifndef SP_3_ORTHOGONALTRIANGLE_H
 #define SP_3_ORTHOGONALTRIANGLE_H
 #include "Shape.h"
-class OrthogonalTriangle: Shape {
+class OrthogonalTriangle: public Shape {
+
+
+private:
 /************************               Fields                    ***************************/
     double a;
 /************************          public METHODS                 *************************/

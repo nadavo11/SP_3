@@ -5,7 +5,7 @@
 #ifndef SP_3_CIRCLE_H
 #define SP_3_CIRCLE_H
 #include "Shape.h"
-class Circle: Shape {
+class Circle: public Shape {
 /************************               Fields                    ***************************/
     double r;
 /************************          public METHODS                 *************************/
