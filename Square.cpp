@@ -8,7 +8,6 @@ using namespace std;
 /***************************             Ctors           ***********************************/
 /**1 input Ctor
  * Input: length of  a*/
-Square::Square(double a) : Shape(), a(a) {}
 /**default Ctor*/
 Square::Square() : Shape() {}
 
@@ -27,8 +26,13 @@ void Square::draw() const {
         for( int j = 0; j < a - 1;j++ )
             cout<<"* ";
         cout<<"*\n";
-
-
     }
+}
+
+void Square::print() const {
+    cout<<"Square details:\ncolor = "<< this->getColor()<<", width = "<<this->getWidth()<<", ";
+    cout<<", side = "<<a<<endl<<"area = "<< this->getArea()<<", perimeter = "<<this->getPerimeter()<<endl;
+    this->draw();
 
 }
+

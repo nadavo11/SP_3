@@ -11,14 +11,13 @@
 using namespace std;
 /***************************             Ctors           ***********************************/
 /**1 input Ctor
- * Input: length of  a*/
-OrthogonalTriangle::OrthogonalTriangle(double a) : Shape(), a(a) {}
 /**default Ctor*/
 OrthogonalTriangle::OrthogonalTriangle() : Shape() {}
 
 /***************************`           METHODS         ************************************/
 
 double OrthogonalTriangle::getPerimeter() const {
+
     return (2+ sqrt(2))*a;
 }
 
@@ -33,8 +32,13 @@ void OrthogonalTriangle::draw() const {
         for( int j = 0; j < i ; j++ )
             cout<<"* ";
         cout<<"*\n";
-
     }
 }
 
+void OrthogonalTriangle::print() const {
+    cout<<"OrthogonalTriangle details:\ncolor = "<< this->getColor()<<", width = "<<this->getWidth()<<", ";
+    cout<<", side = "<<a<<endl<<"area = "<< this->getArea()<<", perimeter = "<<this->getPerimeter()<<endl;
+    this->draw();
+
+}
 

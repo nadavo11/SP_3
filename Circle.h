@@ -11,15 +11,20 @@ class Circle: public Shape {
 /************************          public METHODS                 *************************/
 public:
     /**Ctors*/
-    explicit Circle(double a);
-    Circle();
+    Circle(char* color,double width,double r) : Shape(color,width), r(r) {}
+    Circle():Shape(){}
+    /**Dtor*/
+    ~Circle(){};
 /** returns shapes perimeter */
     double getPerimeter() const;
     /** returns shapes area */
     double getArea() const;
 
 /************************               METHODS                 ***************************/
+    void print() const;
 };
-
+//ostream& operator<<(ostream& os, const Circle& s){
+   // return os;
+//}
 
 #endif //SP_3_CIRCLE_H

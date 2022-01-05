@@ -6,6 +6,7 @@
 #ifndef SP_3_ARRAY_H
 #define SP_3_ARRAY_H
 #include "Shape.h"
+#include "iostream"
 using namespace std;
 
 template<class T>
@@ -15,9 +16,9 @@ public:
     Array(); // constructor
     Array(const Array &a); // copy constructor
     ~Array(); // distructor
-    Array& operator = (const Array &a); // assignment operator
+    Array operator = (const Array &a); // assignment operator
 
-    T& operator [] (unsigned int index); // get array item
+    T operator [] (unsigned int index); // get array item
     void add(const T &item); // add item to the end of array
 
     unsigned int GetSize(); // get len of array (elements)
@@ -26,17 +27,16 @@ public:
     void expand(); // clear array
     void Delete(unsigned int pos); // delete array item
     void* getptr(); // get void* pointer to array data
+    void print(int i);
 
     enum exception { MEMFAIL }; // exception enum
 
 private:
     T *array; // pointer for array's memory
-    unsigned int len; // len of array (elemets)
-    unsigned int cap; // actual len of allocated memory
+     int len; // len of array (elemets)
+     int cap; // capacity of arrey
 
     const static int dyn_array_step = 128; // initial len of array memory (elements)
-    const static int dyn_array_mult = 2; // multiplier (enlarge array memory
-    // dyn_array_mult times  )
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -45,12 +45,10 @@ private:
 template <class T>
 Array<T>::Array()
 {
-    cap = 8; // First allocation
+    cap = 1; // First allocation
     len = 0;
     array = new T[cap];
-
 }
-
 
 template <class T>
 Array<T>::~Array()
@@ -65,7 +63,44 @@ Array<T>::~Array()
 template <class T>
 unsigned int Array<T>::GetSize()
 {
-    return len; // simply return len
+    return len;
+}
+/**clear array of all elements*/
+
+template <class T>
+void Array<T>::Clear() {
+                 //free allocated memory
+    free(array);
+                //we eliminated all items
+    len = 0;
+                // set to initial capacity
+    cap = 1;
+    array = new T[cap];
+}
+
+/**this allows the user to index the dynamic array
+ * class, by key.
+ * INPUT : i - index
+ * OUTPUT: T class item in the i'th index*/
+template <class T>
+T Array<T>::operator [] (unsigned int index){
+    return array[index]; // return array element
+}
+/**this function  is used for adding items
+ * to the end of the dynamic array,
+ * similar to PUSH.
+ *if current capacity is exeeded, we also call extend().
+ * INPUT : i - index
+ * OUTPUT: T class item in the i'th index*/
+template <class T>
+void Array<T>::add(const T &item){
+    T i;
+    len++;
+    if (len > cap){
+        cap *= 2;
+        array = (T *)realloc(array, sizeof(T) * cap);
+    }
+    array[len - 1] = item;
 }
 
 /**this func allows the user to delete items
@@ -74,8 +109,7 @@ unsigned int Array<T>::GetSize()
  * INPUT : i - index
  */
 template <class T>
-void Array<T>::Delete(unsigned int pos)
-{
+void Array<T>::Delete(unsigned int pos){
     if (len == 1) // If array has only one element
         Clear(); // than we clear it, since it will be deleted
     else
@@ -90,50 +124,10 @@ void Array<T>::Delete(unsigned int pos)
 }
 
 template <class T>
-void Array<T>::Clear() // clear array memory
-{
-    len = 0;
-    array = (T *)realloc(array, sizeof(T) * dyn_array_step);
-    // set initial memory len again
-    cap = dyn_array_step;
-}
-
-template <class T>
 void* Array<T>::getptr()
 {
     return array; // return void* pointer
 }
-/**this allows the user to index the dynamic array
- * class, by key.
- * INPUT : i - index
- * OUTPUT: T class item in the i'th index*/
-template <class T>
-T& Array<T>::operator [] (unsigned int index)
-{
-    return array[index]; // return array element
-}
-/**this function  is used for adding items
- * to the end of the dynamic array,
- * similar to PUSH.
- *if current capacity is exeeded, we also call extend().
- * INPUT : i - index
- * OUTPUT: T class item in the i'th index*/
-template <class T>
-void Array<T>::add(const T &item)
-{
-    len++;
-
-    if (len > cap)
-    {
-        cap *= 2;
-
-        array = (T *)realloc(array, sizeof(T) * cap);
-
-    }
-
-    array[len - 1] = item;
-}
-
 
 /************************         private Service METHODS            *************************/
 /*** this is a service method to expand the Array's capacity
@@ -155,35 +149,8 @@ void Array<T>::expand() {
     this->arr = *temp;
 
 }
-
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-/***************************          INCLUDES            **********************************/
-
-
+template<class T>
+void Array<T>::print(int i){
+    cout<<array[i];
+}
 #endif //SP_3_ARRAY_H

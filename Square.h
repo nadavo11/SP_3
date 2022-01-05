@@ -5,14 +5,21 @@
 #ifndef SP_3_SQUARE_H
 #define SP_3_SQUARE_H
 #include "Shape.h"
-class Square: Shape {
+#include "ostream"
+using namespace std;
+class Square: public Shape {
 /************************               Fields                    ***************************/
-    double a{};
+    double a;
 /************************          public METHODS                 *************************/
 public:
     /**Ctors*/
-    Square(double a);
+    Square(char* color,double width,double a) : Shape(color,width), a(a) {}
+    /**Defalt Ctor*/
     Square();
+    /**Dtor*/
+    ~Square(){};
+    void print() const;
+
 /************************               getters                 ***************************/
 /** returns shapes perimeter */
     double getPerimeter() const;
@@ -20,7 +27,7 @@ public:
     double getArea() const;
 
 /************************               METHODS                 ***************************/
-    void draw() const;
+    void draw() const override;
 };
 
 

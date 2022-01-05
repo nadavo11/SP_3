@@ -5,13 +5,21 @@
 #include "Shape.h"
 using namespace std;
 
-double Shape::getPerimeter() const {
-    return 0;
+
+
+ostream &operator<<(ostream &os, const Shape &s) {
+    return os<<s.getArea();
 }
 
-double Shape::getArea() const {
-    return 0;
+char *Shape::getColor() const{
+    return color;
+}
+
+double Shape::getWidth() const{
+    return width;
 }
 
 
-
+void draw(){
+    cout<< "shape draw";
+}
