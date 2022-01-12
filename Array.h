@@ -25,11 +25,14 @@ public:
     void SetSize(unsigned int newsize); // set len of array (elements)
     void Clear(); // clear array
     void expand(); // clear array
-    void Delete(unsigned int pos); // delete array item
+    T remove(unsigned int pos); // delete array item
     void* getptr(); // get void* pointer to array data
     void print(int i);
-
-    enum exception { MEMFAIL }; // exception enum
+    friend ostream& operator<<(ostream& os, const Array<T>& A){
+        for(int i = 0 ; i < A.len; i++)
+            os << A.array[i];
+        return os;
+    };
 
 private:
     T *array; // pointer for array's memory
@@ -53,10 +56,7 @@ Array<T>::Array()
 template <class T>
 Array<T>::~Array()
 {
-    if (array)
-    {
-        free(array); // Freeing memory
-    }
+        this->Clear(); // Freeing memory
 }
 
 
@@ -86,6 +86,8 @@ template <class T>
 T Array<T>::operator [] (unsigned int index){
     return array[index]; // return array element
 }
+
+
 /**this function  is used for adding items
  * to the end of the dynamic array,
  * similar to PUSH.
@@ -94,7 +96,6 @@ T Array<T>::operator [] (unsigned int index){
  * OUTPUT: T class item in the i'th index*/
 template <class T>
 void Array<T>::add(const T &item){
-    T i;
     len++;
     if (len > cap){
         cap *= 2;
@@ -109,7 +110,9 @@ void Array<T>::add(const T &item){
  * INPUT : i - index
  */
 template <class T>
-void Array<T>::Delete(unsigned int pos){
+T Array<T>::remove(unsigned int pos){
+    /**this func may not be reached when empty*/
+    T tmp = this->array[pos];
     if (len == 1) // If array has only one element
         Clear(); // than we clear it, since it will be deleted
     else
@@ -121,6 +124,7 @@ void Array<T>::Delete(unsigned int pos){
         // decrease array len
         len--;
     }
+    return tmp;
 }
 
 template <class T>
@@ -153,4 +157,5 @@ template<class T>
 void Array<T>::print(int i){
     cout<<array[i];
 }
+
 #endif //SP_3_ARRAY_H

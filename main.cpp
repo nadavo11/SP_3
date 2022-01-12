@@ -5,9 +5,19 @@
 **  FILENAME:     ex_3.cpp (simple classes implementation & OOP )              **
 **  DESCRIPTION:  CPP code that lets user define some objects, and play        **
 **                with them.                                                   **
-**                the program offers 3 reach menus for the user to choose      **
-**                from, and lets him create lines, fractions and even clock    **
-**                and manipulate them in a variety of ways.                    **
+**                the program offers 3 powerfull operations for the user to
+ *                choose from:
+ *                  * add shape - and store it in a backend dinamic array      **
+ *                                                                             **
+ *                  * delete an undesired shape from the backend               **
+ *                                                                             **
+ *                  *print a desired shape, to the terminal.                   **
+**                we allow the user to create squares, triangles and even      **
+**                circles and draw them to terminal, not to mention            **
+**                letting them print valuable information about the shapes     **
+ *                they created.                                                **
+ *
+ *                it is allso                                                  **
 **  AUTHOR:        Nadav Orenstein                                             **
 **  LAST UPDATE:  11/12/21 13:42  (SATURDAY)                                   **
 ********************************************************************************/
@@ -21,6 +31,8 @@
 #include "OrthogonalTriangle.h"
 #include "Array.h"
 #include  "string.h"
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCode"
 #define MSG " (1) add a shape\n\
  (2) delete a shape\n\
  (3) print a shape\n\
@@ -43,17 +55,15 @@ int main() {
     int chs2;
     int i;
 
+
     while(Q){
         /** here user chooses between adding a shape, deleteng a shape
          * or prnting a shape, the user may exit the program by choosing 4 */
         cout<<MSG;
         cin>>chs;
-        Square sq;
-        Circle ci;
-        OrthogonalTriangle tri;
-        Shape *s;
 
-        char color[6];
+        int user_is_screwing_around = 1;
+
         double width;
         double length;
 
@@ -65,20 +75,28 @@ int main() {
                 cin>>chs2;
 
                 if(chs2 == 1) {
+                    char color[6];
                     get_props( "square", "side",color, &width, &length);
+                    Square* sq = new Square;
 
-                    sq = Square(color, width, length);
-                    A.add(&sq);
+                    *sq = Square(color, width, length);
+                    A.add(sq);
                 }
                 if(chs2 == 2) {
-                    get_props( "circle", "radius",color, &width, &length);
-                    ci = Circle(color, width, length);
-                    A.add(&ci);
+                    char* color[6];
+                    get_props( "circle", "radius",*color, &width, &length);
+                    Circle* ci = new Circle;
+
+                    *ci = Circle(*color, width, length);
+                    A.add(ci);
                 }
                 if(chs2 == 3) {
-                    get_props( "triangle", "side",color, &width, &length);
-                    tri = OrthogonalTriangle(color, width, length);
-                    A.add(&tri);
+                    char* color[6];
+                    get_props( "triangle", "side",*color, &width, &length);
+                    OrthogonalTriangle* tri =new OrthogonalTriangle;
+
+                    *tri = OrthogonalTriangle(*color, width, length);
+                    A.add(tri);
 
                 }
                 break;
@@ -86,25 +104,59 @@ int main() {
                 /** here user chooses a shape to delete from
                  * the array 4 */
                 if( not A.GetSize()){cout<<"Array is already empty"<<endl; break;}
+                    while (user_is_screwing_around){
+                    try{
+                        cout<<"please choose the index you wish to delete: ";
+                        cin>>i;
+                        if(i >= A.GetSize())
+                            throw i;
+                        user_is_screwing_around = 0;
+                        delete A.remove(i);
+                    }
+                    catch (int i){
+                        user_is_screwing_around = 1;
+                        cout<<"index "<<i<<" is out of range in the current array of length "<<A.GetSize()<<endl;
+                    }
+                    catch (...){
+                        user_is_screwing_around = 1;
+                        cout<<"there seems to be a problem with your input. try again ";
+                    }
 
-                cout<<"please choose the index you wish to delete: ";
-                cin>>i;
-                if(i >= A.GetSize())
-                    throw i;
-                A.Delete(i);
+                }
                 break;
             case 3:
                 /** here user chooses a shape to delete from
-                 * the array 4 */
+                 * the array  */
+                if( not A.GetSize()){cout<<"Array is already empty"<<endl; break;}
+                while (user_is_screwing_around){
+                    try {
+                        cout<<"please choose the index you wish to print: "<<endl;
+                        cin>>i;
+                        if(i >= A.GetSize())
+                            throw i;
 
-                cout<<"please choose the index you wish to print: "<<endl;
-                cin>>i;
+                        user_is_screwing_around = 0;
+                        A[i]->print();
+                    }
 
-                s = A[i];
-                A[i]->print();
+                    catch (int i){
+                        user_is_screwing_around = 1;
+                        cout<<"index "<<i<<" is out of range in the current array of length "<<A.GetSize()<<endl;
+                    }
+                    catch (...){
+                        user_is_screwing_around = 1;
+                        cout<<"there seems to be a problem with your input. try again ";
+                    }
+                }
                 break;
             case 4:
-                Q =0;
+                Q = 0;
+                break;
+            case 5:
+                cout<<A;
+                break;
+            default:
+                cout<<" invalid input, you shall not pass"<<endl;
                 break;
         }
     }
@@ -114,6 +166,7 @@ int main() {
 void get_props(const char *shp, const char *side_or_rad, char *color, double *width, double * length){
     int user_is_screwing_around = 0;
     cout<<"Enter "<<shp<<"'s color: "<<endl;
+
     do {
         /** we let the user choose color */
         try{
@@ -138,3 +191,5 @@ void get_props(const char *shp, const char *side_or_rad, char *color, double *wi
     cin>>*length;
 }
 
+
+#pragma clang diagnostic pop

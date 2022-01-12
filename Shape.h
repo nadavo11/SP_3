@@ -4,18 +4,22 @@
 
 #ifndef SP_3_SHAPE_H
 #define SP_3_SHAPE_H
+
+#include <cstring>
 #include "iostream"
 using namespace std;
 
 class Shape {
     /***********************            private fields              ***************************/
-    char* color;
     double width;
+protected:
+    char color[6];
+
 public:
     /***********************            public methods              ***************************/
     /**Ctoe*/
     Shape(){};
-    Shape(char* color ,double width): color(color), width(width){};
+    Shape(char* color ,double width):  width(width){strcpy(this->color,color);};
     /**Dtor*/
     virtual ~Shape(){};
 
@@ -25,7 +29,6 @@ public:
     virtual double getPerimeter() const = 0;
     /** returns shapes area */
     virtual double getArea() const = 0;
-    char * getColor() const;
     double getWidth() const;
     virtual void draw() const{}
 

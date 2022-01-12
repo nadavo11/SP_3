@@ -36,7 +36,7 @@ void OrthogonalTriangle::draw() const {
 }
 
 void OrthogonalTriangle::print() const {
-    cout<<"OrthogonalTriangle details:\ncolor = "<< this->getColor()<<", width = "<<this->getWidth()<<", ";
+    cout<<"OrthogonalTriangle details:\ncolor = "<< this->color<<", width = "<<this->getWidth()<<", ";
     cout<<", side = "<<a<<endl<<"area = "<< this->getArea()<<", perimeter = "<<this->getPerimeter()<<endl;
     this->draw();
 

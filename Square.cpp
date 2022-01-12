@@ -30,7 +30,7 @@ void Square::draw() const {
 }
 
 void Square::print() const {
-    cout<<"Square details:\ncolor = "<< this->getColor()<<", width = "<<this->getWidth()<<", ";
+    cout<<"Square details:\ncolor = "<< this->color<<", width = "<<this->getWidth()<<", ";
     cout<<", side = "<<a<<endl<<"area = "<< this->getArea()<<", perimeter = "<<this->getPerimeter()<<endl;
     this->draw();
 

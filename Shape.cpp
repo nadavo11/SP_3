@@ -5,21 +5,13 @@
 #include "Shape.h"
 using namespace std;
 
-
-
 ostream &operator<<(ostream &os, const Shape &s) {
     return os<<s.getArea();
-}
-
-char *Shape::getColor() const{
-    return color;
 }
 
 double Shape::getWidth() const{
     return width;
 }
-
-
 void draw(){
     cout<< "shape draw";
 }

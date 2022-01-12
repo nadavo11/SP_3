@@ -24,7 +24,7 @@ double Circle::getArea() const {
 }
 
 void Circle::print() const {
-    cout<<"Circle details:\ncolor = "<< this->getColor()<<", width = "<<this->getWidth()<<", ";
+    cout<<"Circle details:\ncolor = "<< this->color<<", width = "<<this->getWidth()<<", ";
     cout<<", radius = "<<r<<endl<<"area = "<< this->getArea()<<", perimeter = "<<this->getPerimeter()<<endl;
 
 }
